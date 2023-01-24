@@ -24,6 +24,8 @@ public class homeTask01 {
 //        System.out.println(Short.MAX_VALUE);
 //        System.out.println(Short.MIN_VALUE);
 
+        long start = System.currentTimeMillis();
+
         for (int j = i; j < Short.MAX_VALUE; j++) {
             if (j % n == 0) {                       // условия если значение делиться без остатка то
                 int[] tmp1 = new int[m1.length+1];  //  создаем временый массив
@@ -45,8 +47,39 @@ public class homeTask01 {
             }
 
         }
-        System.out.println(Arrays.toString(m1));
-        System.out.println(Arrays.toString(m2));
+        long end = System.currentTimeMillis();
+
+        // 2 вариант бистрый пробегаемся по счетчику
+
+        long start1 = System.currentTimeMillis();
+        int count = 0;
+
+        for (int j = i; j < Short.MAX_VALUE; j++) {     
+            if (j % n == 0) count++;  // если услови правильное то счетчик увиличиваем
+        }
+
+        int[] m3 = new int[count];    // создаем массив
+        count = 0;                    // обнуляем счетчик
+
+        for (int j = i; j < Short.MAX_VALUE; j++) {
+            if (j % n == 0) m3[count++] = j;  // присваиваем значение в массив
+        }
+
+        count = 0;               // обнуляем счетчик
+        for (int j = Short.MIN_VALUE; j < i; j++) {
+            if (j % n != 0) count++;  
+        }
+        int[] m4 = new int[count];
+        count = 0;
+        for (int j = Short.MIN_VALUE; j < i; j++) {
+            if (j % n != 0) m4[count++] = j;  
+        }
+        long end1 = System.currentTimeMillis();
+        // System.out.println(Arrays.toString(m1));
+        // System.out.println(Arrays.toString(m2));
+        System.out.println(end - start);   //  Время работы 750мс
+        System.out.println(end1 - start1); //  Время работы 2мс
+
     }
 }
 
